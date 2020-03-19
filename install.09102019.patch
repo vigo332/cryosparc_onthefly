@@ -1,0 +1,35 @@
+--- cryosparc2_master/install.sh	2019-06-25 20:37:49.000000000 -0500
++++ updated_install.sh	2019-09-09 19:04:18.604949000 -0500
+@@ -174,9 +174,22 @@
+ #################################################
+ # CHECK HOSTNAME
+ #################################################
+-if ! ping -c 4 "$MASTER_HOSTNAME" > /dev/null ; then
+-    echo "Error: Could not ping $MASTER_HOSTNAME"
+-    exit 1
++#if ! ping -c 4 "$MASTER_HOSTNAME" > /dev/null ; then
++#    echo "Error: Could not ping $MASTER_HOSTNAME"
++#    exit 1
++#fi
++
++res=$(ssh $MASTER_HOSTNAME -C "hostname")
++if [[ $? -eq 2 ]]
++then
++	echo "Error: Cannot ssh into master node $MASTER_HOSTNAME, aborting..."
++	exit 1
++fi
++
++if [[ ! $res == *"$MASTER_HOSTNAME"* ]];
++then
++	echo "Error: master hostname does not match real hostname $res. "
++	exit 1
+ fi
+ 
+ ################################################
+@@ -387,4 +400,4 @@
+     echo " master node."
+     echo ""
+     echo "******************************************************************"
+-fi
+\ No newline at end of file
++fi

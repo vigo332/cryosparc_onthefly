@@ -1,0 +1,27 @@
+--- cryosparcm.bak	2019-11-26 14:02:52.823829000 -0600
++++ cryosparcm	2019-11-26 14:07:13.101531000 -0600
+@@ -256,7 +256,7 @@
+         exit 1
+     fi
+ 
+-    echo "Creating user $name with email: $email password: $password"
++    echo "Creating user $name with email: $email and prompted password."
+     cryosparcm cli "create_user('initial', '$email','$password', '$name')"
+     exit 0
+     ;;
+@@ -295,7 +295,7 @@
+         exit 1
+     fi
+     
+-    echo "Resetting password for email: $email new password: $password"
++    echo "Resetting password for email: $email and new password."
+     cryosparcm cli "reset_password('$email','$password')"
+     exit 0
+     ;;
+@@ -1261,4 +1261,4 @@
+ #     shift # past argument
+ #     ;;
+ # esac
+-# done
+\ No newline at end of file
++# done
